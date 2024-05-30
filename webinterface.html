@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Universal GPIO</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<p></p>
+
+<div class="container">
+  <div class="row justify-content-center align-items-center vh-100">
+    <div class="col-6">
+      <div class="jumbotron text-center">
+      
+		 <p><strong>Internal API for GPIO Configuration and Control</strong></p>
+        
+  <br>
+  
+    
+    <p>Our internal API provides a simple and efficient way to manage the GPIO (General Purpose Input/Output) pins of various SBCs (Single Board Computers) such as Orange Pi and Raspberry Pi. This document describes the functionalities of the API, the configuration requirements, and how to use the API to open and close GPIO pins via URL requests.</p>
+    
+    <h2>Overview</h2>
+    <p>The internal API is designed to simplify the management of GPIO pins. It uses a configuration file to define the settings of the pins and provides endpoints to control the pins by simply sending HTTP requests. This allows for easy integration into various applications and workflows.</p>
+    <center>
+    <img src="data:image/png;base64,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"/>
+    </center>
+    <h2>Configuration File</h2>
+    <p>Before you can use the API, you need to create a configuration file that defines the GPIO settings. Below is an example configuration file for an Orange Pi Zero 3 1GB.</p>
+
+    <h3>Example Configuration File</h3>
+    <pre>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;GPIOCoreSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;SOCKET_VENDOR&gt;orangepi&lt;/SOCKET_VENDOR&gt;
+  &lt;SOCKET_TYPE&gt;ORANGEPI_ZERO3_1GB&lt;/SOCKET_TYPE&gt;  
+  &lt;SOCKET_GPIO_SAFE_LIST&gt;PC9;PC11;PC5;PC8;PC10&lt;/SOCKET_GPIO_SAFE_LIST&gt;
+  &lt;SOCKET_GPIO_SAFE_ID&gt;73;75;69;72;74&lt;/SOCKET_GPIO_SAFE_ID&gt;
+  &lt;SOCKET_GPIO_SAFE_PIN&gt;7;12;13;15;26&lt;/SOCKET_GPIO_SAFE_PIN&gt;
+  &lt;SOCKET_GPIO_SAFE_GND&gt;9;14;6;20;25&lt;/SOCKET_GPIO_SAFE_GND&gt;
+  &lt;SOCKET_GPIO_SAFE_LOGICAL&gt;REL1;REL2;REL3;REL4;REL5&lt;/SOCKET_GPIO_SAFE_LOGICAL&gt;  
+  &lt;SOCKET_CONTROL_ON&gt;1&lt;/SOCKET_CONTROL_ON&gt;
+  &lt;SOCKET_CONTROL_OFF&gt;0&lt;/SOCKET_CONTROL_OFF&gt;
+  &lt;SOCKET_CONTROL_DIRECTION&gt;out&lt;/SOCKET_CONTROL_DIRECTION&gt;
+&lt;/GPIOCoreSettings&gt;
+    </pre>
+
+    <h3>Key Fields</h3>
+    <ul>
+        <li><strong>SOCKET_GPIO_SAFE_LIST:</strong> List of pins (contact names) on the Orange Pi.</li>
+        <li><strong>SOCKET_GPIO_SAFE_ID:</strong> Internal addresses used on the board.</li>
+        <li><strong>SOCKET_GPIO_SAFE_PIN:</strong> Physical pin numbers on the header.</li>
+        <li><strong>SOCKET_GPIO_SAFE_GND:</strong> Ground pins for the respective GPIO pins.</li>
+        <li><strong>SOCKET_GPIO_SAFE_LOGICAL:</strong> Logical names for the pins, such as REL1, REL2, etc.</li>
+        <li><strong>SOCKET_CONTROL_ON:</strong> Value to turn a pin on.</li>
+        <li><strong>SOCKET_CONTROL_OFF:</strong> Value to turn a pin off.</li>
+        <li><strong>SOCKET_CONTROL_DIRECTION:</strong> Direction of control, typically 'out' for output.</li>
+    </ul>
+
+    <h2>API Endpoints</h2>
+    <p>The internal API provides endpoints for managing the GPIO pins through URL requests.</p>
+
+    <h3>1. Turn Pin On</h3>
+    <h4>URL</h4>
+    <pre>GET /gpio/{logical_name}/on/</pre>
+    <h4>Parameters</h4>
+    <p><code>{logical_name}</code>: The logical name of the pin you want to turn on (e.g., REL1).</p>
+    <h4>Example Request</h4>
+    <pre>curl http://192.168.0.82:8090/gpio/REL1/on/</pre>
+
+    <h3>2. Turn Pin Off</h3>
+    <h4>URL</h4>
+    <pre>GET /gpio/{logical_name}/off/</pre>
+    <h4>Parameters</h4>
+    <p><code>{logical_name}</code>: The logical name of the pin you want to turn off (e.g., REL1).</p>
+    <h4>Example Request</h4>
+    <pre>curl http://192.168.0.82:8090/gpio/REL1/off/</pre>
+
+    <h2>Usage and Integration</h2>
+    <p>The internal API can be easily integrated into existing systems and applications. By using HTTP requests, you can manage the GPIO pins without worrying about the underlying hardware configuration details. This makes it ideal for applications such as home automation, IoT projects, and other scenarios where you need to control hardware remotely.</p>
+
+    <h3>Example Usage in a Python Script</h3>
+    <pre>
+import requests
+
+# Turn REL1 on
+response = requests.get('http://192.168.0.82:8090/gpio/REL1/on/')
+print(response.text)
+
+# Turn REL1 off
+response = requests.get('http://192.168.0.82:8090/gpio/REL1/off/')
+print(response.text)
+    </pre>
+
+    <h2>Conclusion</h2>
+    <p>Our internal API for managing GPIO pins offers a robust and user-friendly solution for controlling hardware through HTTP requests. With a simple-to-configure configuration file and clear API endpoints, users can quickly get started with controlling their SBCs.</p>
+    <p>For further questions or support, please contact our support team.</p>
+
+
+        
+        
+        
+        
+   <a href="/gpio/api/endpoints/" target="_blank"><button class="btn btn-primary btn-lg">Endpoint List</button></a>
+
+</div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>

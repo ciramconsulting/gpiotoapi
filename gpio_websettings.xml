@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CoreWebSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <API_PORT>8090</API_PORT>
+  <API_ONLY>true</API_ONLY>
+  <PLATFORM_WAIT_FOR_LAN>30</PLATFORM_WAIT_FOR_LAN>
+  <USE_LOCAL_HOSTNAME>false</USE_LOCAL_HOSTNAME>
+  <LOCAL_HOSTNAME></LOCAL_HOSTNAME>
+  <USE_LOCAL>true</USE_LOCAL>
+  <TICK_SPEED>6000</TICK_SPEED>
+</CoreWebSettings>
